@@ -1,0 +1,45 @@
+<h2>SPARQL</h2>
+<p class="lead">Much of the power and flexibility of RDF graph databases comes from a query/update 
+language called SPARQL - short for <strong>SPARQL Protocol and RDF Query Language</strong> - that
+allows you to search and manipulate the subject, predicate, and objects in your triplestore.</p>
+<h3 class="bg-info">Example 1: Retrieving all triples</h3>
+<div class="row">
+    <section class="col-md-3">
+        <p class="lead">One of the simplest SPARQL queries is to simply retrieve all triples
+        in a triplestore.</p>
+        <p>In this SPARQL query, the <strong>SELECT</strong> and <strong>WHERE</strong> are 
+        reserved keywords. In the <strong>SELECT</strong> row, three variables are outputted to the 
+        calling client that filters the query based on the contents in <strong>WHERE</strong>
+        clause, in this case just returning all triple patterns.</p>
+ 
+    </section>
+    <section class="col-md-9">
+    <pre class="prettyprint" style="font-size: 1.5em">
+SELECT ?subject ?predicate ?object
+WHERE {
+	?subject ?predicate ?object .
+}
+    </pre>
+    </section>
+</div>
+<h3 class="bg-info">Example 2: Retrieving all subjects of a particular type</h3>
+<div class="row">
+    <section class="col-md-9">
+     <pre class="prettyprint" style="font-size: 1.5em">
+PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+PREFIX schema: &lt;http://schema.org/&gt; 
+
+SELECT DISTINCT ?subject 
+WHERE {
+    ?subject rdf:type schema:Book .
+} ORDER BY ?subject
+    </pre>
+    </section>
+    <section class="col-md-3">
+        <p class="lead">
+            This query returns all of the subjects in the triplestore that have a type (class) 
+            of the <a href="http://schema.org/Book">http://schema.org/Book</a>. The <strong>ORDER BY</strong>
+            clause returns the subjects in ascending order in an alpha-numerical sort.
+        </p>
+    </section>
+</div>
