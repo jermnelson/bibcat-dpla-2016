@@ -11,7 +11,10 @@ using BIBFRAME</p>
             <a name="home"></a>
             <p class="lead">Bibliographic representation and management of
             library collections</P>
-        </section>
+            <img src="{{ url_for('static', filename='img/CC-LOGO.png') }}">
+            <img src="{{ url_for('static', filename='img/bibframe-logo-small.jpg') }}">
+            <img src="{{ url_for('static', filename='img/dpla-logo.png') }}">
+                </section>
         <section class="col-md-4">
         <div class="card card-inverse card-primary">
             <h3 class="card-header">Topics</h3>
@@ -27,12 +30,15 @@ using BIBFRAME</p>
                     Creating BIBFRAME Applications with RDF Framework &amp; BIBCAT
                     <a href="#create-bf-rdf-apps">
                         <i class="fa fa-play" aria-hidden="true"></i>
-
                     </a>
 
                 </li>
                 <li class="list-group-item">
                     Building a DP.LA Service Hub with BIBCAT
+                    <a href="#dpla-bibcat">
+                        <i class="fa fa-play" aria-hidden="true"></i>
+                    </a>
+
                 </li>
             </ul>
         </div>
@@ -44,7 +50,6 @@ using BIBFRAME</p>
     <hr>
     {% include 'create-bf-apps-rdf-framework.html' %}
     <hr>
-    <h2>Building a DP.LA Service Hub with BIBCAT</h2>
-
+    {% include 'dpla-service-hub-bibcat.html' %}
 </div>
 {% endblock main %}

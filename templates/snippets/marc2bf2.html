@@ -4,39 +4,27 @@ open-source Catalog Pull Platform. Because of the very recent release of BIBFRAM
 in April of 2016, the tools for converting MARC records to the BIBFRAME classes 
 has just started. The first iteration of a linked-data tool produces the following
 BIBFRAME 2.0 graphs with minimal mappings.</p>
-<ol class="lead">
-    <li>Define a MARC-to-BIBFRAME mapping inspired by the work 
-    at <a href="http://www.marc21rdf.info/">marc21rdf</a> by defining
-    a <code>kds:PropertyLinker</code> or 
-    <code>kdsaOrdered:PropertyLinker</code> set of triples.
-    </li>
-</ol>
+<img src="{{ url_for('static', filename='img/RdfFramework_data_flow.png') }}" style="width:800px">
+<p class="lead">A key advantage of the RDF Framework is that most 
+definitions, mappings, and other tasks are structured in RDF, so learning
+the basics of RDF and Linked Data will enable staff to use the same
+technologies to build the tools as well as metadata manipulation need
+for cataloging and other technical services workflows.</p>
+
 <h3>RDF BIBFRAME 2.0 Graph</h3>
 <div class="row">
     <section class="col-md-9">
         <pre class="prettyprint">
-&lt;http://bibcat.org/684302c6-3106-11e6-bc94-ac87a3129ce6&gt; a bf:Instance ;
+&lt;http://catalog.coloradocollege.edu/fbca3f82-63d2-11e6-90c8-005056c00008&gt; a bf:Instance ;
     bf:bookFormat [ a bf:BookFormat ;
             rdf:value "(hbk.)" ] ;
         </pre>
     </section>
     <section class="col-md-3">
-    <p>Our instance is created with a temporary BIBCAT URL with a RDF class of 
+    <p>Our instance is created a Colorado College Catalog URL with a RDF class of 
     BIBFRAME Instance. The bookFormat property is set with a blank node and
     is mapped in the <a 
-      {#class="btn btn-primary" #}
-      data-toggle="popover" 
-      title="Mapping MARC-to-BIBFRAME"
-      data-placement="left" 
-      data-html="true"
-      data-content="<pre>
-bc:m21-bf_bookFormat a kds:PropertyLinker ;
-  kds:srcPropUri m21:M020__q ;
-  kds:destClassUri bf:BookFormat ;
-  kds:destPropUri rdf:value ;
-  kds:linkedRange bf:bookFormat ;
-  kds:linkedClass bf:Instance .</pre>"
-    >kds-bibcat-marc-ingestion.ttl</a> turtle file
+    href="https://github.com/KnowledgeLinks/rdfw-bibcat/blob/master/rdfw-definitions/kds-bibcat-marc-ingestion.ttl">kds-bibcat-marc-ingestion.ttl</a> turtle file
     </p>
 
     </section>
@@ -69,21 +57,21 @@ bc:m21-bf_bookFormat a kds:PropertyLinker ;
 <div class="row">
     <section class="col-md-9">
         <pre class="prettyprint">
-    bf:hasItem &lt;http://bibcat.org/6813c022-3106-11e6-a30e-ac87a3129ce6&gt; ;
     bf:identifiedBy [ a bf:Isbn ;
             rdf:value "0718021762",
                 "9780718021764" ] ;
-    bf:originDate "2015" ;
+    bf:instanceOf [ a bf:Work ;
+            bf:originDate "2015" ] ;
         </pre>
     </section>
     <section class="col-md-3">
     <p>
-        The hasItem BIBFRAME property links to the BIBFRAME 
-        item Class. The ISBN identifiers are used for de-duplicating
-        Instances in the bibcat.org catalog. The origin date is 
-        extracted from the MARC 008 field.
+        This item is identified by two ISBN numbers that are stored in a blank node for 
+        the BF Instance's <code>bf:identifiedBy</code> property. The ISBN identifiers are 
+        used for de-duplicating Instances in the catalog. For metadata (like bf:originDate)
+        associated with a  BIBFRAME Work is stored in a temporary blank node. A separate 
+        generation process from the ingester is used to generate Work IRI for Instances. 
     </p>
-    </section>
 </div>
 <div class="row">
     <section class="col-md-9">
@@ -105,7 +93,10 @@ bc:m21-bf_bookFormat a kds:PropertyLinker ;
     <section class="col-md-3">
     <p>
         The BIBFRAME subjects are stored as blank nodes that with
-        the values of various 600 and 650 MARC subfields. 
+        the values of various 600 and 650 MARC subfields. We are a developing
+        a Subject Linker that takes these values and does a look-up on a LOC
+        Authority triplestore to match the corresponding LOC IRI at 
+        <a href="http://id.loc.gov">http://id.loc.gov</a>
     </p>
     </section>
 
@@ -132,7 +123,7 @@ bc:m21-bf_bookFormat a kds:PropertyLinker ;
             bf:mainTitle "A hobbit, a wardrobe, and a great war :" ;
             bf:subtitle "how J.R.R. Tolkien and C.S. Lewis rediscovered faith, friendship, and heroism in the cataclysm of 1914-1918 /" ] ;
     relators:aut [ a bf:Person ;
-            schema:alternativeName "Loconte, Joe," ] .    
+            schema:name "Loconte, Joe," ] .    
         </pre>
 
     </section>
@@ -144,13 +135,26 @@ bc:m21-bf_bookFormat a kds:PropertyLinker ;
 <div class="row">
     <section class="col-md-9">
         <pre class="prettyprint">
-&lt;http://bibcat.org/225cc36c-30e0-11e6-8bfc-ac87a3129ce6&gt; a bf:Item ;
-    bf:itemOf &lt;http://bibcat.org/2289199c-30e0-11e6-8334-ac87a3129ce6&gt; .
+&lt;http://catalog.coloradocollege.edu/fde0cb48-63d2-11e6-8296-005056c00008&gt; a bf:Item ;
+    bf:barcode [ a bf:Barcode ;
+            rdf:value "33027006635050" ] ;
+    bf:generationProcess [ a bf:GenerationProcess ;
+            bf:generationDate "2016-08-16T17:00:53.646383" ;
+            rdf:value "Generated by BIBCAT version 1.1.0 from KnowledgeLinks.io"@en ] ;
+    bf:heldBy &lt;http://www.coloradocollege.edu/&gt; ;
+    bf:identifiedBy [ a bf:Local ;
+            rdf:value ".i23751198" ] ;
+    bf:itemOf &lt;http://catalog.coloradocollege.edu/fbca3f82-63d2-11e6-90c8-005056c00008&gt; .
+        </pre>
     </section>
     <section class="col-md-3">
     <p>
         The BIBCAT Item should have additional properties that are 
-        specific to your ILS.
+        specific to your ILS. In this case, a custom 
+        <a href="https://github.com/Tutt-Library/tiger-catalog/blob/tutt-dev/custom/cc-mods-bf.ttl">Turtle Rules file</a>
+         is being developed for extracting specific 
+        information to store in this BIBFRAME Item like barcode number and
+        the item number from Colorado College's legacy ILS.  
     </p> 
     </section>
 </div>
