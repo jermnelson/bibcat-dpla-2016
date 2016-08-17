@@ -11,5 +11,58 @@
     </section>
     <section class="col-md-6">
         <h3>Design &amp; First Build Iteration</h3>
+        <ul class="lead">
+            <li>Built upon work initially contracted by the Library of Congress</li>
+            <li>Pre-existing turtle RDF workflows for MARC21 records to BIBFRAME 2.0 entities
+            already in development</li>
+            <li>Easier to build <em>Metadata format/file format</em> to BIBFRAME and then
+             only need one BIBFRAME to to output OMH XML 
+        </ul>
     </section>
+</div>
+<img src="{{ url_for('static', filename='img/dpla-service-hub-flow.svg')  }}">
+<div class="row">
+
+
+</div>
+<div class="row">
+    <div class="col-md-11">
+
+        <h3>RDF Dublin Core XML</h3>
+        <p class="lead">The source for <a href="http://cdm16079.contentdm.oclc.org/cdm/ref/collection/p15330coll22/id/24933">this</a> 
+         digital object in the Denver Public Library's Digital Collections.
+        <pre class="prettyprint">
+&lt;rdf:Description xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+about="http://cdm16079.contentdm.oclc.org:80/cdm/ref/collection/p15330coll22/id/24933"&gt;
+    &lt;dc:title&gt;Sopris statue
+&lt;/dc:title&gt;
+    &lt;dc:creator /&gt;
+    &lt;dc:subject&gt;City Park (Denver, Colo.)--1930-1950.; Denver (Colo.)--1930-1950.; Monuments &amp; memorials--Colorado--Denver--1930-1950.; Sculpture--Colorado--Denver--1930-1950.; Sopris, Elizabeth Allen--Monuments.&lt;/dc:subject&gt;
+    &lt;dc:description&gt;A view of the Sopris statue at City Park in Denver, Colorado. The statue is of a young boy that stands on a sundial. A cement bench surrounds the statue and a man made pool is below it. The City Park Pavilion is behind the statue.
+Album is indexed.; Album page 1 includes X-20083 to X-20090 on verso page 2 X-20091 to X-20099.; Formerly F46648; Photo edges are cropped.; Title inked below photoprint.; Written above photo is "2", and below "In memory of Elizabeth Allen Sopris a gift to Denver by S.T. Sopris".; R7100200849&lt;/dc:description&gt;
+    &lt;dc:publisher /&gt;
+    &lt;dc:contributor /&gt;
+    &lt;dc:date&gt;[between 1930 and 1950]
+&lt;/dc:date&gt;
+    &lt;dc:type&gt;Photographic prints.; Imaged.; Image&lt;/dc:type&gt;
+    &lt;dc:format&gt;1 photoprint ; 8 x 14 cm. (3 x 5 1/2 in.) mounted on album page  41 x 46 cm. (16 x 18 in.)
+Photograph
+&lt;/dc:format&gt;
+    &lt;dc:identifier&gt;X-20084
+F46648 DPL
+10020084.tif&lt;/dc:identifier&gt;
+    &lt;dc:source /&gt;
+    &lt;dc:language /&gt;
+    &lt;dc:relation&gt;C Photo Album 111.; C Photo Album 111. Parks and playgrounds.; C Photo Album 111. Parks and playgrounds, City Park.
+Image File: ZZR710020084
+
+http://photoswest.org/cgi-bin/imager?10020084+X-20084&lt;/dc:relation&gt;
+    &lt;dc:coverage /&gt;
+    &lt;dc:rights&gt;Restrictions applying to use or reproduction of this image available from the Western History/Genealogy Dept., Denver Public Library.&lt;/dc:rights&gt;
+  &lt;/rdf:Description&gt;
+        </pre>
+        <h4>Big thanks to Craig and the rest of Denver Public Library for their assistance</h4>
+
+    </div>
 </div>
